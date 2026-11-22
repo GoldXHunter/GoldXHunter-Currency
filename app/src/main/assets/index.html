@@ -7,14 +7,14 @@
 <meta name="description" content="A mobile-friendly multi-currency calculator with live USD exchange rates.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-<title>GoldXHunter Currency V2.2</title>
+<title>GoldXHunter Currency V2.3</title>
 <style>
 :root{color-scheme:dark;--bg:#080e1a;--panel:#111c2d;--panel2:#0b1423;--line:#24344b;--muted:#91a3ba;--text:#eef5ff;--cyan:#48c8f5;--green:#4ade9b;--red:#fb7185;--gold:#d7b56d}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#14243a 0%,var(--bg) 55%);color:var(--text);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:calc(16px + env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom))}
 main{width:min(100%,520px);margin:auto}.top{display:flex;align-items:center;justify-content:space-between;margin:4px 2px 18px}.brand{display:flex;gap:11px;align-items:center}.mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#1b3854,#0b1728);border:1px solid #31516c;display:grid;place-items:center;color:var(--gold);font-weight:900;font-size:18px}.eyebrow{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:800}.top h1{font-size:19px;margin:1px 0 0}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 10px;color:var(--muted);font-size:11px}
 .card{background:linear-gradient(160deg,rgba(21,35,54,.98),rgba(13,23,38,.98));border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 16px 42px #0005;margin-bottom:13px}.rate-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.section-label{font-size:11px;letter-spacing:1.3px;color:var(--muted);font-weight:800;text-transform:uppercase}.rate-status{font-size:11px;color:var(--green)}.rates{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:13px}.rate{background:var(--panel2);border:1px solid #1d2b40;border-radius:12px;padding:10px}.rate b{display:block;font-size:12px;color:var(--muted);font-weight:600}.rate strong{font-size:15px;color:var(--text);font-variant-numeric:tabular-nums}.rate small{display:block;color:#6f839d;font-size:10px;margin-top:2px}
-.currency-list{display:grid;gap:9px;margin-top:14px}.currency-row{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:9px;align-items:center;background:var(--panel2);border:1px solid #203049;border-radius:13px;padding:10px 11px}.code{font-weight:850;color:var(--cyan);font-size:12px}.desc{display:block;color:#70839c;font-size:10px;font-weight:500}.amount{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font-size:17px;font-weight:650;text-align:right;font-variant-numeric:tabular-nums}.amount::placeholder{color:#53657c}.equiv{min-width:80px;text-align:right;color:var(--green);font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}.equiv small{display:block;color:#6f839d;font-size:9px;font-weight:500}
-.total{background:linear-gradient(120deg,#0c2631,#102b31);border:1px solid #23515a;border-radius:17px;padding:17px;text-align:center;margin-top:15px}.total span{display:block;color:#9db7bd;font-size:11px;letter-spacing:1px;text-transform:uppercase}.total strong{display:block;font-size:clamp(29px,8vw,38px);color:var(--green);letter-spacing:-1px;font-variant-numeric:tabular-nums;margin-top:4px}
+.currency-list{display:grid;gap:9px;margin-top:14px}.currency-row{background:var(--panel2);border:1px solid #203049;border-radius:13px;padding:10px}.currency-heading{font-weight:850;color:var(--cyan);font-size:12px;margin-bottom:8px}.currency-heading span{display:block;color:#70839c;font-size:10px;font-weight:500}.flow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.flow-cell{min-width:0}.flow-cell label{display:block;color:var(--muted);font-size:10px;margin:0 0 4px}.flow-input{width:100%;min-width:0;padding:9px 5px;border:1px solid #344a66;border-radius:8px;background:#091424;color:var(--text);font-size:14px;font-weight:650;text-align:right;font-variant-numeric:tabular-nums}.flow-net{min-height:38px;display:flex;align-items:center;justify-content:flex-end;padding:7px 5px;border:1px solid #23515a;border-radius:8px;background:#0c2631;color:var(--green);font-size:13px;font-weight:750;text-align:right;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.flow-net.negative{color:var(--red);border-color:#633847;background:#2a1721}.totals-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:15px}.total{min-width:0;padding:12px 6px}.total span{font-size:9px;letter-spacing:.5px}.total strong{font-size:clamp(17px,4.5vw,25px);overflow-wrap:anywhere}
+.total{background:linear-gradient(120deg,#0c2631,#102b31);border:1px solid #23515a;border-radius:17px;padding:17px;text-align:center;margin-top:15px}.total span{display:block;color:#9db7bd;font-size:11px;letter-spacing:1px;text-transform:uppercase}.total strong{display:block;font-size:clamp(29px,8vw,38px);color:var(--green);letter-spacing:-1px;font-variant-numeric:tabular-nums;margin-top:4px}.totals-grid .total strong{font-size:clamp(17px,4.5vw,25px);overflow-wrap:anywhere}.totals-grid .total span{font-size:9px;letter-spacing:.5px}
 .actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}button{border:0;border-radius:12px;padding:12px 9px;font:700 13px system-ui;cursor:pointer;min-height:44px}button:active{transform:scale(.98)}.primary{background:var(--cyan);color:#061522}.secondary{background:#263951;color:var(--text)}.quiet{background:#1a293c;color:#c0ccdb;border:1px solid #31445d}.mini-actions{display:flex;gap:8px;margin-top:9px}.mini-actions button{flex:1;min-height:39px;font-size:12px}
 .settings{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}.settings button{background:transparent;color:var(--cyan);padding:5px;font-size:12px;min-height:30px}.status{font-size:11px;color:var(--muted);text-align:center;margin:13px 4px 0;min-height:16px}.status.error{color:var(--red)}.status.ok{color:var(--green)}
 .panel-title{display:flex;justify-content:space-between;align-items:center}.history-list{display:grid;gap:8px;margin-top:12px}.history-item{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--panel2);border:1px solid #203049;border-radius:11px;padding:10px}.history-item strong{font-size:13px}.history-item small{display:block;color:var(--muted);font-size:10px}.history-item button{min-height:32px;padding:5px 9px;font-size:11px}
@@ -27,13 +27,13 @@ footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
 <body>
 <main>
   <header class="top">
-    <div class="brand"><div class="mark">FX</div><div><div class="eyebrow">GOLDXHUNTER TOOLS</div><h1>GoldXHunter Currency V2.2</h1></div></div>
+    <div class="brand"><div class="mark">FX</div><div><div class="eyebrow">GOLDXHUNTER TOOLS</div><h1>GoldXHunter Currency V2.3</h1></div></div>
     <div class="pill">USD BASE</div>
   </header>
 
   <section class="card" id="quickConverter">
     <div class="quick-title"><div class="section-label">Quick Converter</div><span class="pill">12 CURRENCIES</span></div>
-    <p class="quick-sub">Convert one amount instantly without changing your deposit calculator or its total.</p>
+    <p class="quick-sub">Convert one amount instantly without changing your deposit and withdrawal totals.</p>
     <div class="field"><label for="quickAmount">Amount</label><input class="quick-amount" id="quickAmount" type="number" inputmode="decimal" min="0" step="any" value="3000" placeholder="Enter amount"></div>
     <div class="quick-pair">
       <div><label for="quickFrom">From</label><select id="quickFrom"></select></div>
@@ -52,28 +52,117 @@ footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
       <div class="rate"><b>CAD → USD</b><strong id="rateCAD">—</strong><small>per 1 CAD</small></div>
       <div class="rate"><b>BTC → USD</b><strong id="rateBTC">—</strong><small>per 1 BTC</small></div>
     </div>
+    <div class="section-label" style="margin-top:14px">Deposit & withdrawal entries</div>
     <div class="currency-list">
-      <div class="currency-row"><div class="code">USD<span class="desc">US Dollar</span></div><input class="amount" id="usd" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="USD amount"><div class="equiv" id="out-usd">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">GBP<span class="desc">Pound Sterling</span></div><input class="amount" id="gbp" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="GBP amount"><div class="equiv" id="out-gbp">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">EUR<span class="desc">Euro</span></div><input class="amount" id="eur" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="EUR amount"><div class="equiv" id="out-eur">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">CAD<span class="desc">Canadian Dollar</span></div><input class="amount" id="cad" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="CAD amount"><div class="equiv" id="out-cad">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">USC<span class="desc">US Cent</span></div><input class="amount" id="usc" type="number" inputmode="decimal" step="any" placeholder="0" aria-label="USC amount"><div class="equiv" id="out-usc">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">ILS<span class="desc">Israeli Shekel</span></div><input class="amount" id="ils" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="ILS amount"><div class="equiv" id="out-ils">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">USDC<span class="desc">USD Coin</span></div><input class="amount" id="usdc" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="USDC amount"><div class="equiv" id="out-usdc">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">USDT<span class="desc">Tether</span></div><input class="amount" id="usdt" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="USDT amount"><div class="equiv" id="out-usdt">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">BTC<span class="desc">Bitcoin</span></div><input class="amount" id="btc" type="number" inputmode="decimal" step="any" placeholder="0.00000000" aria-label="BTC amount"><div class="equiv" id="out-btc">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">AED<span class="desc">UAE Dirham</span></div><input class="amount" id="aed" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="AED amount"><div class="equiv" id="out-aed">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">SAR<span class="desc">Saudi Riyal</span></div><input class="amount" id="sar" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="SAR amount"><div class="equiv" id="out-sar">—<small>USD value</small></div></div>
-      <div class="currency-row"><div class="code">KWD<span class="desc">Kuwaiti Dinar</span></div><input class="amount" id="kwd" type="number" inputmode="decimal" step="any" placeholder="0.000" aria-label="KWD amount"><div class="equiv" id="out-kwd">—<small>USD value</small></div></div>
+      <div class="currency-row" data-currency="USD">
+        <div class="currency-heading">USD<span>US Dollar</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-usd">Deposits</label><input class="flow-input deposit-input" id="dep-usd" data-code="USD" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="USD deposits"></div>
+          <div class="flow-cell"><label for="wd-usd">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-usd" data-code="USD" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="USD withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-usd">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="GBP">
+        <div class="currency-heading">GBP<span>Pound Sterling</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-gbp">Deposits</label><input class="flow-input deposit-input" id="dep-gbp" data-code="GBP" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="GBP deposits"></div>
+          <div class="flow-cell"><label for="wd-gbp">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-gbp" data-code="GBP" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="GBP withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-gbp">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="EUR">
+        <div class="currency-heading">EUR<span>Euro</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-eur">Deposits</label><input class="flow-input deposit-input" id="dep-eur" data-code="EUR" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="EUR deposits"></div>
+          <div class="flow-cell"><label for="wd-eur">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-eur" data-code="EUR" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="EUR withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-eur">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="CAD">
+        <div class="currency-heading">CAD<span>Canadian Dollar</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-cad">Deposits</label><input class="flow-input deposit-input" id="dep-cad" data-code="CAD" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="CAD deposits"></div>
+          <div class="flow-cell"><label for="wd-cad">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-cad" data-code="CAD" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="CAD withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-cad">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="USC">
+        <div class="currency-heading">USC<span>US Cent</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-usc">Deposits</label><input class="flow-input deposit-input" id="dep-usc" data-code="USC" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="USC deposits"></div>
+          <div class="flow-cell"><label for="wd-usc">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-usc" data-code="USC" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="USC withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-usc">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="ILS">
+        <div class="currency-heading">ILS<span>Israeli Shekel</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-ils">Deposits</label><input class="flow-input deposit-input" id="dep-ils" data-code="ILS" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="ILS deposits"></div>
+          <div class="flow-cell"><label for="wd-ils">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-ils" data-code="ILS" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="ILS withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-ils">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="USDC">
+        <div class="currency-heading">USDC<span>USD Coin</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-usdc">Deposits</label><input class="flow-input deposit-input" id="dep-usdc" data-code="USDC" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="USDC deposits"></div>
+          <div class="flow-cell"><label for="wd-usdc">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-usdc" data-code="USDC" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="USDC withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-usdc">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="USDT">
+        <div class="currency-heading">USDT<span>Tether</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-usdt">Deposits</label><input class="flow-input deposit-input" id="dep-usdt" data-code="USDT" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="USDT deposits"></div>
+          <div class="flow-cell"><label for="wd-usdt">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-usdt" data-code="USDT" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="USDT withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-usdt">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="BTC">
+        <div class="currency-heading">BTC<span>Bitcoin</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-btc">Deposits</label><input class="flow-input deposit-input" id="dep-btc" data-code="BTC" type="number" inputmode="decimal" min="0" step="0.00000001" placeholder="0.00000000" aria-label="BTC deposits"></div>
+          <div class="flow-cell"><label for="wd-btc">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-btc" data-code="BTC" type="number" inputmode="decimal" min="0" step="0.00000001" placeholder="0.00000000" aria-label="BTC withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-btc">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="AED">
+        <div class="currency-heading">AED<span>UAE Dirham</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-aed">Deposits</label><input class="flow-input deposit-input" id="dep-aed" data-code="AED" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="AED deposits"></div>
+          <div class="flow-cell"><label for="wd-aed">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-aed" data-code="AED" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="AED withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-aed">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="SAR">
+        <div class="currency-heading">SAR<span>Saudi Riyal</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-sar">Deposits</label><input class="flow-input deposit-input" id="dep-sar" data-code="SAR" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="SAR deposits"></div>
+          <div class="flow-cell"><label for="wd-sar">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-sar" data-code="SAR" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="SAR withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-sar">—</div></div>
+        </div>
+      </div>
+      <div class="currency-row" data-currency="KWD">
+        <div class="currency-heading">KWD<span>Kuwaiti Dinar</span></div>
+        <div class="flow-grid">
+          <div class="flow-cell"><label for="dep-kwd">Deposits</label><input class="flow-input deposit-input" id="dep-kwd" data-code="KWD" type="number" inputmode="decimal" min="0" step="0.001" placeholder="0.000" aria-label="KWD deposits"></div>
+          <div class="flow-cell"><label for="wd-kwd">Withdrawals</label><input class="flow-input withdrawal-input" id="wd-kwd" data-code="KWD" type="number" inputmode="decimal" min="0" step="0.001" placeholder="0.000" aria-label="KWD withdrawals"></div>
+          <div class="flow-cell"><label>Net deposits</label><div class="flow-net" id="net-kwd">—</div></div>
+        </div>
+      </div>
     </div>
-    <div class="total"><span>Total USD equivalent</span><strong id="total">$0.00</strong></div>
+    <div class="totals-grid">
+      <div class="total"><span>Gross Deposits</span><strong id="totalDeposits">$0.00</strong></div>
+      <div class="total"><span>Withdrawals</span><strong id="totalWithdrawals">$0.00</strong></div>
+      <div class="total"><span>Net Deposits</span><strong id="totalNet">$0.00</strong></div>
+    </div>
     <div class="actions">
       <button class="primary" id="refreshBtn">↻ Refresh</button>
-      <button class="secondary" id="copyBtn">Copy total</button>
+      <button class="secondary" id="copyBtn">Copy summary</button>
       <button class="quiet" id="clearBtn">Clear</button>
     </div>
     <div class="mini-actions">
-      <button class="quiet" id="saveBtn">＋ Save calculation</button>
+      <button class="quiet" id="saveBtn">＋ Save summary</button>
       <button class="quiet" id="shareBtn">↗ Share</button>
     </div>
     <div class="settings"><span class="section-label">Rate controls</span><button id="settingsBtn">Manual rates / settings →</button></div>
@@ -81,10 +170,10 @@ footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
   </section>
 
   <section class="card">
-    <div class="panel-title"><div class="section-label">Saved calculations</div><button class="quiet" id="clearHistoryBtn" style="min-height:32px;padding:6px 9px;font-size:11px">Clear history</button></div>
-    <div class="history-list" id="history"><div style="color:var(--muted);font-size:12px">No saved calculations yet.</div></div>
+    <div class="panel-title"><div class="section-label">Saved productivity summaries</div><button class="quiet" id="clearHistoryBtn" style="min-height:32px;padding:6px 9px;font-size:11px">Clear history</button></div>
+    <div class="history-list" id="history"><div style="color:var(--muted);font-size:12px">No saved summaries yet.</div></div>
   </section>
-  <footer>Rates are indicative reference rates, not guaranteed transaction prices. Fiat: ExchangeRate-API · Crypto: CoinGecko.</footer>
+  <footer>Net deposits may be negative when withdrawals exceed deposits. Net deposits can be negative when withdrawals exceed deposits. Rates are indicative reference rates, not guaranteed transaction prices. Fiat: ExchangeRate-API · Crypto: CoinGecko.</footer>
 </main>
 
 <div class="modal" id="settingsModal" aria-hidden="true">
@@ -110,14 +199,25 @@ footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
     return Number(n).toLocaleString('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits});
   };
   const status = (msg,type='') => { $('status').textContent=msg; $('status').className='status '+type; };
-  const getAmounts = () => Object.fromEntries(ids.map(id=>[id,Math.max(0,Number($(id).value)||0)]));
+  const getAmounts = () => ({
+    deposits:Object.fromEntries(codes.map(c=>[c,Math.max(0,Number($('dep-'+c.toLowerCase()).value)||0)])),
+    withdrawals:Object.fromEntries(codes.map(c=>[c,Math.max(0,Number($('wd-'+c.toLowerCase()).value)||0)]))
+  });
   const cyprusTime = date => new Date(date).toLocaleString('en-GB',{timeZone:'Asia/Nicosia',dateStyle:'medium',timeStyle:'short'});
   const calculate = () => {
-    const a=getAmounts(); let total=0;
-    ids.forEach(id=>{const code=id.toUpperCase(), value=a[id]*rates[code];total+=value;$('out-'+id).innerHTML=(a[id]||$(id).value!==''?'$'+fmt(value):'—')+'<small>USD value</small>';});
-    $('total').textContent='$'+fmt(total);
+    const a=getAmounts();let gross=0,withdrawals=0,net=0;
+    codes.forEach(code=>{
+      const key=code.toLowerCase(),dep=a.deposits[code],wd=a.withdrawals[code];
+      const depUsd=dep*rates[code],wdUsd=wd*rates[code],netUsd=depUsd-wdUsd;
+      gross+=depUsd;withdrawals+=wdUsd;net+=netUsd;
+      const netEl=$('net-'+key);netEl.textContent=(dep||wd)?fmt(dep-wd,code):'—';
+      netEl.classList.toggle('negative',netUsd<0);
+    });
+    $('totalDeposits').textContent='$'+fmt(gross);
+    $('totalWithdrawals').textContent='$'+fmt(withdrawals);
+    $('totalNet').textContent='$'+fmt(net);
     if($('quickResult'))renderQuickConverter();
-    return {amounts:a,total};
+    return {amounts:a,gross,withdrawals,net};
   };
   const currencyNames={USD:'US Dollar',GBP:'Pound Sterling',EUR:'Euro',CAD:'Canadian Dollar',USC:'US Cent',ILS:'Israeli Shekel',USDC:'USD Coin',USDT:'Tether',BTC:'Bitcoin',AED:'UAE Dirham',SAR:'Saudi Riyal',KWD:'Kuwaiti Dinar'};
   const quickFormat=(value,code)=>{
@@ -194,14 +294,24 @@ footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
   }
   function renderHistory(){
     const h=JSON.parse(localStorage.getItem('currencyHistory')||'[]');$('history').innerHTML='';
-    if(!h.length){$('history').innerHTML='<div style="color:var(--muted);font-size:12px">No saved calculations yet.</div>';return;}
-    h.forEach(item=>{const row=document.createElement('div');row.className='history-item';const info=document.createElement('div');const strong=document.createElement('strong');strong.textContent='$'+fmt(item.total);const small=document.createElement('small');small.textContent=item.date+' · '+item.summary;info.append(strong,small);const load=document.createElement('button');load.className='secondary';load.textContent='Load';load.onclick=()=>{ids.forEach(id=>$(id).value=item.amounts[id]||'');calculate();status('Saved calculation loaded.','ok');};row.append(info,load);$('history').append(row);});
+    if(!h.length){$('history').innerHTML='<div style="color:var(--muted);font-size:12px">No saved summaries yet.</div>';return;}
+    h.forEach(item=>{
+      const row=document.createElement('div');row.className='history-item';const info=document.createElement('div');
+      const strong=document.createElement('strong');strong.textContent='Net $'+fmt(item.net??item.total??0);
+      const small=document.createElement('small');small.textContent=item.date+' · Gross $'+fmt(item.gross??item.total??0)+' · Withdrawals $'+fmt(item.withdrawalsTotal??0);
+      info.append(strong,small);const load=document.createElement('button');load.className='secondary';load.textContent='Load';
+      load.onclick=()=>{codes.forEach(c=>{const k=c.toLowerCase();$('dep-'+k).value=item.amounts?.deposits?.[c]??item.amounts?.[k]??'';$('wd-'+k).value=item.amounts?.withdrawals?.[c]??'';});calculate();status('Saved productivity summary loaded.','ok');};
+      row.append(info,load);$('history').append(row);
+    });
   }
   function saveCalculation(){
-    const result=calculate(), amounts=result.amounts;
-    if(!ids.some(id=>$(id).value.trim()!=='')){status('Enter an amount before saving.','error');return;}
-    const summary=ids.filter(id=>amounts[id]>0).map(id=>id.toUpperCase()+': '+amounts[id]).join(' · ');
-    const h=JSON.parse(localStorage.getItem('currencyHistory')||'[]');h.unshift({total:result.total,amounts,date:new Date().toLocaleString(),summary});localStorage.setItem('currencyHistory',JSON.stringify(h.slice(0,20)));renderHistory();status('Calculation saved on this device.','ok');
+    const result=calculate(),a=result.amounts;
+    const hasEntries=codes.some(c=>a.deposits[c]>0||a.withdrawals[c]>0);
+    if(!hasEntries){status('Enter at least one deposit or withdrawal before saving.','error');return;}
+    const summary=codes.filter(c=>a.deposits[c]>0||a.withdrawals[c]>0).map(c=>c+' D:'+a.deposits[c]+' W:'+a.withdrawals[c]).join(' · ');
+    const h=JSON.parse(localStorage.getItem('currencyHistory')||'[]');
+    h.unshift({gross:result.gross,withdrawalsTotal:result.withdrawals,net:result.net,amounts:a,date:new Date().toLocaleString(),summary});
+    localStorage.setItem('currencyHistory',JSON.stringify(h.slice(0,20)));renderHistory();status('Productivity summary saved on this device.','ok');
   }
   function openSettings(){
     $('manualToggle').checked=manual;
@@ -217,10 +327,11 @@ footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
     if(manual)rates={...rates,...r,USD:1,USC:.01};
     localStorage.setItem('currencySettings',JSON.stringify({manual,rates:r}));renderRates();calculate();closeSettings();status(manual?'Manual rates applied.':'Live rates selected.','ok');if(!manual)fetchRates();
   };
-  ids.forEach(id=>$(id).addEventListener('input',calculate));
-  $('refreshBtn').onclick=fetchRates;$('clearBtn').onclick=()=>{ids.forEach(id=>$(id).value='');calculate();status('All amounts cleared.');};
-  $('copyBtn').onclick=async()=>{const {total}=calculate();try{await navigator.clipboard.writeText('$'+fmt(total));status('Total copied to clipboard.','ok');}catch{status('Clipboard access unavailable in this browser.','error');}};
-  $('shareBtn').onclick=async()=>{const {amounts,total}=calculate();const msg='Currency total: $'+fmt(total)+' USD\n'+ids.filter(id=>amounts[id]>0).map(id=>id.toUpperCase()+': '+amounts[id]).join('\n');if(navigator.share){try{await navigator.share({title:'GoldXHunter Currency V2.2',text:msg});}catch{}}else{try{await navigator.clipboard.writeText(msg);status('Summary copied.','ok');}catch{status('Sharing is not supported in this browser.','error');}}};
+  document.querySelectorAll('.deposit-input,.withdrawal-input').forEach(input=>input.addEventListener('input',calculate));
+  $('refreshBtn').onclick=fetchRates;$('clearBtn').onclick=()=>{document.querySelectorAll('.deposit-input,.withdrawal-input').forEach(input=>input.value='');calculate();status('All deposit and withdrawal entries cleared.');};
+  const buildSummaryText=()=>{const r=calculate();return 'GoldXHunter Productivity Summary\nGross Deposits: $'+fmt(r.gross)+' USD\nWithdrawals: $'+fmt(r.withdrawals)+' USD\nNet Deposits: $'+fmt(r.net)+' USD';};
+  $('copyBtn').onclick=async()=>{try{await navigator.clipboard.writeText(buildSummaryText());status('Productivity summary copied.','ok');}catch{status('Clipboard access unavailable in this browser.','error');}};
+  $('shareBtn').onclick=async()=>{const msg=buildSummaryText();if(navigator.share){try{await navigator.share({title:'GoldXHunter Currency V2.3',text:msg});}catch{}}else{try{await navigator.clipboard.writeText(msg);status('Summary copied.','ok');}catch{status('Sharing is not supported in this browser.','error');}}};
   $('saveBtn').onclick=saveCalculation;$('clearHistoryBtn').onclick=()=>{localStorage.removeItem('currencyHistory');renderHistory();status('Saved history cleared.');};
   $('settingsModal').addEventListener('click',e=>{if(e.target===$('settingsModal'))closeSettings();});
   setupQuickConverter();loadSaved();renderHistory();calculate();fetchRates();
