@@ -7,7 +7,7 @@
 <meta name="description" content="A mobile-friendly multi-currency calculator with live USD exchange rates.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-<title>GoldXHunter Currency V2.1</title>
+<title>GoldXHunter Currency V2.2</title>
 <style>
 :root{color-scheme:dark;--bg:#080e1a;--panel:#111c2d;--panel2:#0b1423;--line:#24344b;--muted:#91a3ba;--text:#eef5ff;--cyan:#48c8f5;--green:#4ade9b;--red:#fb7185;--gold:#d7b56d}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#14243a 0%,var(--bg) 55%);color:var(--text);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:calc(16px + env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom))}
@@ -19,6 +19,7 @@ main{width:min(100%,520px);margin:auto}.top{display:flex;align-items:center;just
 .settings{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}.settings button{background:transparent;color:var(--cyan);padding:5px;font-size:12px;min-height:30px}.status{font-size:11px;color:var(--muted);text-align:center;margin:13px 4px 0;min-height:16px}.status.error{color:var(--red)}.status.ok{color:var(--green)}
 .panel-title{display:flex;justify-content:space-between;align-items:center}.history-list{display:grid;gap:8px;margin-top:12px}.history-item{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--panel2);border:1px solid #203049;border-radius:11px;padding:10px}.history-item strong{font-size:13px}.history-item small{display:block;color:var(--muted);font-size:10px}.history-item button{min-height:32px;padding:5px 9px;font-size:11px}
 .modal{position:fixed;inset:0;background:#020711cc;display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:5}.modal.show{display:flex}.sheet{width:min(100%,520px);background:#142238;border:1px solid #38506b;border-radius:20px;padding:19px;margin-bottom:env(safe-area-inset-bottom);max-height:85vh;overflow:auto}.sheet h2{font-size:18px;margin:0 0 6px}.sheet p{font-size:12px;color:var(--muted);margin:0 0 14px}.field{margin:12px 0}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field input{width:100%;padding:12px;border:1px solid #344a66;border-radius:10px;background:#091424;color:var(--text);font-size:15px}.sheet-actions{display:flex;gap:8px;margin-top:16px}.sheet-actions button{flex:1}
+.quick-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:7px}.quick-sub{font-size:11px;color:var(--muted);margin:0 0 13px}.quick-amount{width:100%;padding:13px 12px;border:1px solid #344a66;border-radius:11px;background:#091424;color:var(--text);font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}.quick-pair{display:grid;grid-template-columns:minmax(0,1fr) 46px minmax(0,1fr);gap:8px;align-items:end}.quick-pair label{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.quick-pair select{width:100%;min-width:0;padding:12px 8px;border:1px solid #344a66;border-radius:10px;background:#091424;color:var(--text);font-size:14px;font-weight:700}.swap-btn{min-height:43px;padding:7px;background:#263951;color:var(--cyan);font-size:20px}.quick-result{margin-top:13px;background:linear-gradient(120deg,#0c2631,#102b31);border:1px solid #23515a;border-radius:14px;padding:14px;text-align:center}.quick-result small{display:block;color:#9db7bd;font-size:10px;letter-spacing:1px;text-transform:uppercase}.quick-result strong{display:block;color:var(--green);font-size:clamp(23px,6vw,31px);font-variant-numeric:tabular-nums;overflow-wrap:anywhere;margin-top:3px}.quick-rate{font-size:10px;color:var(--muted);text-align:center;margin-top:8px}
 footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
 @media(min-width:520px){body{padding-top:28px}.card{padding:21px}}
 </style>
@@ -26,9 +27,22 @@ footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
 <body>
 <main>
   <header class="top">
-    <div class="brand"><div class="mark">FX</div><div><div class="eyebrow">GOLDXHUNTER TOOLS</div><h1>GoldXHunter Currency V2.1</h1></div></div>
+    <div class="brand"><div class="mark">FX</div><div><div class="eyebrow">GOLDXHUNTER TOOLS</div><h1>GoldXHunter Currency V2.2</h1></div></div>
     <div class="pill">USD BASE</div>
   </header>
+
+  <section class="card" id="quickConverter">
+    <div class="quick-title"><div class="section-label">Quick Converter</div><span class="pill">12 CURRENCIES</span></div>
+    <p class="quick-sub">Convert one amount instantly without changing your deposit calculator or its total.</p>
+    <div class="field"><label for="quickAmount">Amount</label><input class="quick-amount" id="quickAmount" type="number" inputmode="decimal" min="0" step="any" value="3000" placeholder="Enter amount"></div>
+    <div class="quick-pair">
+      <div><label for="quickFrom">From</label><select id="quickFrom"></select></div>
+      <button class="swap-btn" id="quickSwap" type="button" aria-label="Swap currencies" title="Swap currencies">⇄</button>
+      <div><label for="quickTo">To</label><select id="quickTo"></select></div>
+    </div>
+    <div class="quick-result"><small id="quickResultLabel">USD equivalent</small><strong id="quickResult">—</strong></div>
+    <div class="quick-rate" id="quickRate">Uses the same rates as the deposit calculator.</div>
+  </section>
 
   <section class="card">
     <div class="rate-head"><div class="section-label">Exchange rates</div><div class="rate-status" id="rateBadge">● Starting…</div></div>
@@ -102,8 +116,37 @@ footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
     const a=getAmounts(); let total=0;
     ids.forEach(id=>{const code=id.toUpperCase(), value=a[id]*rates[code];total+=value;$('out-'+id).innerHTML=(a[id]||$(id).value!==''?'$'+fmt(value):'—')+'<small>USD value</small>';});
     $('total').textContent='$'+fmt(total);
+    if($('quickResult'))renderQuickConverter();
     return {amounts:a,total};
   };
+  const currencyNames={USD:'US Dollar',GBP:'Pound Sterling',EUR:'Euro',CAD:'Canadian Dollar',USC:'US Cent',ILS:'Israeli Shekel',USDC:'USD Coin',USDT:'Tether',BTC:'Bitcoin',AED:'UAE Dirham',SAR:'Saudi Riyal',KWD:'Kuwaiti Dinar'};
+  const quickFormat=(value,code)=>{
+    const digits=code==='BTC'?8:code==='KWD'?3:2;
+    return Number(value).toLocaleString('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits});
+  };
+  function renderQuickConverter(){
+    const from=$('quickFrom').value,to=$('quickTo').value;
+    const raw=$('quickAmount').value;
+    const amount=Number(raw);
+    if(raw.trim()===''||!Number.isFinite(amount)||amount<0||!rates[from]||!rates[to]){
+      $('quickResult').textContent='—';$('quickResultLabel').textContent=currencyNames[to]+' equivalent';$('quickRate').textContent='Enter a valid amount to convert.';return;
+    }
+    const result=amount*rates[from]/rates[to];
+    $('quickResult').textContent=quickFormat(result,to)+' '+to;
+    $('quickResultLabel').textContent=currencyNames[to]+' equivalent';
+    const oneUnit=rates[from]/rates[to];
+    $('quickRate').textContent='1 '+from+' = '+quickFormat(oneUnit,to)+' '+to+' · Indicative rate';
+  }
+  function setupQuickConverter(){
+    const options=codes.map(c=>`<option value="${c}">${c} — ${currencyNames[c]}</option>`).join('');
+    $('quickFrom').innerHTML=options;$('quickTo').innerHTML=options;
+    $('quickFrom').value='ILS';$('quickTo').value='USD';
+    $('quickAmount').addEventListener('input',renderQuickConverter);
+    $('quickFrom').addEventListener('change',renderQuickConverter);
+    $('quickTo').addEventListener('change',renderQuickConverter);
+    $('quickSwap').onclick=()=>{const from=$('quickFrom').value;$('quickFrom').value=$('quickTo').value;$('quickTo').value=from;renderQuickConverter();};
+    renderQuickConverter();
+  }
   const renderRates = () => {
     ['GBP','EUR','CAD'].forEach(c=>$('rate'+c).textContent=fmt(rates[c],c));
     $('rateBTC').textContent='$'+fmt(rates.BTC,'BTC');
@@ -177,10 +220,10 @@ footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
   ids.forEach(id=>$(id).addEventListener('input',calculate));
   $('refreshBtn').onclick=fetchRates;$('clearBtn').onclick=()=>{ids.forEach(id=>$(id).value='');calculate();status('All amounts cleared.');};
   $('copyBtn').onclick=async()=>{const {total}=calculate();try{await navigator.clipboard.writeText('$'+fmt(total));status('Total copied to clipboard.','ok');}catch{status('Clipboard access unavailable in this browser.','error');}};
-  $('shareBtn').onclick=async()=>{const {amounts,total}=calculate();const msg='Currency total: $'+fmt(total)+' USD\n'+ids.filter(id=>amounts[id]>0).map(id=>id.toUpperCase()+': '+amounts[id]).join('\n');if(navigator.share){try{await navigator.share({title:'GoldXHunter Currency V2.1',text:msg});}catch{}}else{try{await navigator.clipboard.writeText(msg);status('Summary copied.','ok');}catch{status('Sharing is not supported in this browser.','error');}}};
+  $('shareBtn').onclick=async()=>{const {amounts,total}=calculate();const msg='Currency total: $'+fmt(total)+' USD\n'+ids.filter(id=>amounts[id]>0).map(id=>id.toUpperCase()+': '+amounts[id]).join('\n');if(navigator.share){try{await navigator.share({title:'GoldXHunter Currency V2.2',text:msg});}catch{}}else{try{await navigator.clipboard.writeText(msg);status('Summary copied.','ok');}catch{status('Sharing is not supported in this browser.','error');}}};
   $('saveBtn').onclick=saveCalculation;$('clearHistoryBtn').onclick=()=>{localStorage.removeItem('currencyHistory');renderHistory();status('Saved history cleared.');};
   $('settingsModal').addEventListener('click',e=>{if(e.target===$('settingsModal'))closeSettings();});
-  loadSaved();renderHistory();calculate();fetchRates();
+  setupQuickConverter();loadSaved();renderHistory();calculate();fetchRates();
   if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();
 </script>
