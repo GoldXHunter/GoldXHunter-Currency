@@ -3,6 +3,8 @@
     <application
         android:allowBackup="true"
         android:label="GoldXHunter Currency"
+        android:icon="@drawable/goldxhunter_icon"
+        android:roundIcon="@drawable/goldxhunter_icon"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="false">
         <activity
