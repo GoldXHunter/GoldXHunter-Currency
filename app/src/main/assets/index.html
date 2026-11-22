@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="A mobile-friendly multi-currency calculator with live USD exchange rates.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Currency Calculator</title>
+<style>
+:root{color-scheme:dark;--bg:#080e1a;--panel:#111c2d;--panel2:#0b1423;--line:#24344b;--muted:#91a3ba;--text:#eef5ff;--cyan:#48c8f5;--green:#4ade9b;--red:#fb7185;--gold:#d7b56d}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#14243a 0%,var(--bg) 55%);color:var(--text);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:calc(16px + env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom))}
+main{width:min(100%,520px);margin:auto}.top{display:flex;align-items:center;justify-content:space-between;margin:4px 2px 18px}.brand{display:flex;gap:11px;align-items:center}.mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#1b3854,#0b1728);border:1px solid #31516c;display:grid;place-items:center;color:var(--gold);font-weight:900;font-size:18px}.eyebrow{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:800}.top h1{font-size:19px;margin:1px 0 0}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 10px;color:var(--muted);font-size:11px}
+.card{background:linear-gradient(160deg,rgba(21,35,54,.98),rgba(13,23,38,.98));border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 16px 42px #0005;margin-bottom:13px}.rate-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.section-label{font-size:11px;letter-spacing:1.3px;color:var(--muted);font-weight:800;text-transform:uppercase}.rate-status{font-size:11px;color:var(--green)}.rates{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:13px}.rate{background:var(--panel2);border:1px solid #1d2b40;border-radius:12px;padding:10px}.rate b{display:block;font-size:12px;color:var(--muted);font-weight:600}.rate strong{font-size:15px;color:var(--text);font-variant-numeric:tabular-nums}.rate small{display:block;color:#6f839d;font-size:10px;margin-top:2px}
+.currency-list{display:grid;gap:9px;margin-top:14px}.currency-row{display:grid;grid-template-columns:55px minmax(0,1fr) auto;gap:9px;align-items:center;background:var(--panel2);border:1px solid #203049;border-radius:13px;padding:10px 11px}.code{font-weight:850;color:var(--cyan);font-size:12px}.desc{display:block;color:#70839c;font-size:10px;font-weight:500}.amount{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font-size:17px;font-weight:650;text-align:right;font-variant-numeric:tabular-nums}.amount::placeholder{color:#53657c}.equiv{min-width:80px;text-align:right;color:var(--green);font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}.equiv small{display:block;color:#6f839d;font-size:9px;font-weight:500}
+.total{background:linear-gradient(120deg,#0c2631,#102b31);border:1px solid #23515a;border-radius:17px;padding:17px;text-align:center;margin-top:15px}.total span{display:block;color:#9db7bd;font-size:11px;letter-spacing:1px;text-transform:uppercase}.total strong{display:block;font-size:clamp(29px,8vw,38px);color:var(--green);letter-spacing:-1px;font-variant-numeric:tabular-nums;margin-top:4px}
+.actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}button{border:0;border-radius:12px;padding:12px 9px;font:700 13px system-ui;cursor:pointer;min-height:44px}button:active{transform:scale(.98)}.primary{background:var(--cyan);color:#061522}.secondary{background:#263951;color:var(--text)}.quiet{background:#1a293c;color:#c0ccdb;border:1px solid #31445d}.mini-actions{display:flex;gap:8px;margin-top:9px}.mini-actions button{flex:1;min-height:39px;font-size:12px}
+.settings{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}.settings button{background:transparent;color:var(--cyan);padding:5px;font-size:12px;min-height:30px}.status{font-size:11px;color:var(--muted);text-align:center;margin:13px 4px 0;min-height:16px}.status.error{color:var(--red)}.status.ok{color:var(--green)}
+.panel-title{display:flex;justify-content:space-between;align-items:center}.history-list{display:grid;gap:8px;margin-top:12px}.history-item{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--panel2);border:1px solid #203049;border-radius:11px;padding:10px}.history-item strong{font-size:13px}.history-item small{display:block;color:var(--muted);font-size:10px}.history-item button{min-height:32px;padding:5px 9px;font-size:11px}
+.modal{position:fixed;inset:0;background:#020711cc;display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:5}.modal.show{display:flex}.sheet{width:min(100%,520px);background:#142238;border:1px solid #38506b;border-radius:20px;padding:19px;margin-bottom:env(safe-area-inset-bottom);max-height:85vh;overflow:auto}.sheet h2{font-size:18px;margin:0 0 6px}.sheet p{font-size:12px;color:var(--muted);margin:0 0 14px}.field{margin:12px 0}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field input{width:100%;padding:12px;border:1px solid #344a66;border-radius:10px;background:#091424;color:var(--text);font-size:15px}.sheet-actions{display:flex;gap:8px;margin-top:16px}.sheet-actions button{flex:1}
+footer{text-align:center;color:#5d718b;font-size:10px;margin:16px 0 0}
+@media(min-width:520px){body{padding-top:28px}.card{padding:21px}}
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div class="brand"><div class="mark">FX</div><div><div class="eyebrow">GOLDXHUNTER TOOLS</div><h1>Currency Calculator</h1></div></div>
+    <div class="pill">USD BASE</div>
+  </header>
+
+  <section class="card">
+    <div class="rate-head"><div class="section-label">Exchange rates</div><div class="rate-status" id="rateBadge">● Starting…</div></div>
+    <div class="rates" id="rateGrid">
+      <div class="rate"><b>GBP → USD</b><strong id="rateGBP">—</strong><small>per 1 GBP</small></div>
+      <div class="rate"><b>EUR → USD</b><strong id="rateEUR">—</strong><small>per 1 EUR</small></div>
+      <div class="rate"><b>CAD → USD</b><strong id="rateCAD">—</strong><small>per 1 CAD</small></div>
+      <div class="rate"><b>USC ↔ USD</b><strong>100 USC = $1</strong><small>1 USD = 100 USC · 1 USC = $0.01</small></div>
+    </div>
+    <div class="currency-list">
+      <div class="currency-row"><div class="code">USD<span class="desc">US Dollar</span></div><input class="amount" id="usd" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="USD amount"><div class="equiv" id="out-usd">—<small>USD value</small></div></div>
+      <div class="currency-row"><div class="code">GBP<span class="desc">Pound Sterling</span></div><input class="amount" id="gbp" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="GBP amount"><div class="equiv" id="out-gbp">—<small>USD value</small></div></div>
+      <div class="currency-row"><div class="code">EUR<span class="desc">Euro</span></div><input class="amount" id="eur" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="EUR amount"><div class="equiv" id="out-eur">—<small>USD value</small></div></div>
+      <div class="currency-row"><div class="code">CAD<span class="desc">Canadian Dollar</span></div><input class="amount" id="cad" type="number" inputmode="decimal" step="any" placeholder="0.00" aria-label="CAD amount"><div class="equiv" id="out-cad">—<small>USD value</small></div></div>
+      <div class="currency-row"><div class="code">USC<span class="desc">US Cents</span></div><input class="amount" id="usc" type="number" inputmode="decimal" step="any" placeholder="0" aria-label="USC amount"><div class="equiv" id="out-usc">—<small>USD value</small></div></div>
+    </div>
+    <div class="total"><span>Total USD equivalent</span><strong id="total">$0.00</strong></div>
+    <div class="actions">
+      <button class="primary" id="refreshBtn">↻ Refresh</button>
+      <button class="secondary" id="copyBtn">Copy total</button>
+      <button class="quiet" id="clearBtn">Clear</button>
+    </div>
+    <div class="mini-actions">
+      <button class="quiet" id="saveBtn">＋ Save calculation</button>
+      <button class="quiet" id="shareBtn">↗ Share</button>
+    </div>
+    <div class="settings"><span class="section-label">Rate controls</span><button id="settingsBtn">Manual rates / settings →</button></div>
+    <div class="status" id="status" role="status">Ready</div>
+  </section>
+
+  <section class="card">
+    <div class="panel-title"><div class="section-label">Saved calculations</div><button class="quiet" id="clearHistoryBtn" style="min-height:32px;padding:6px 9px;font-size:11px">Clear history</button></div>
+    <div class="history-list" id="history"><div style="color:var(--muted);font-size:12px">No saved calculations yet.</div></div>
+  </section>
+  <footer>Rates are indicative reference rates, not guaranteed transaction prices.</footer>
+</main>
+
+<div class="modal" id="settingsModal" aria-hidden="true">
+  <div class="sheet">
+    <h2>Rate settings</h2><p>Use live reference rates or enter your own conversion rates. Manual rates are stored on this device.</p>
+    <div class="field"><label><input type="checkbox" id="manualToggle" style="width:auto;margin-right:7px"> Use manual rates</label></div>
+    <div class="field"><label for="manualGBP">1 GBP = USD</label><input id="manualGBP" type="number" step="any"></div>
+    <div class="field"><label for="manualEUR">1 EUR = USD</label><input id="manualEUR" type="number" step="any"></div>
+    <div class="field"><label for="manualCAD">1 CAD = USD</label><input id="manualCAD" type="number" step="any"></div>
+    <div class="sheet-actions"><button class="quiet" id="cancelSettings">Cancel</button><button class="primary" id="saveSettings">Apply settings</button></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const fallback = {USD:1, GBP:1.3082, EUR:1.0975, CAD:0.6974, USC:0.01};
+  let rates = {...fallback}, updatedAt = null, manual = false;
+  const $ = id => document.getElementById(id);
+  const ids = ['usd','gbp','eur','cad','usc'];
+  const fmt = n => Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const status = (msg, type='') => { $('status').textContent=msg; $('status').className='status '+type; };
+  const getAmounts = () => Object.fromEntries(ids.map(id=>[id,Math.max(0,Number($(id).value)||0)]));
+  const calculate = () => {
+    const a=getAmounts(); let total=0;
+    ids.forEach(id=>{const value=a[id]*rates[id.toUpperCase()];total+=value;$('out-'+id).innerHTML=(a[id]||$(id).value!==''?'$'+fmt(value):'—')+'<small>USD value</small>';});
+    $('total').textContent='$'+fmt(total);
+    return {amounts:a,total};
+  };
+  const renderRates = () => {
+    ['GBP','EUR','CAD'].forEach(c=>$('rate'+c).textContent=rates[c].toFixed(4));
+    $('rateBadge').textContent=manual?'● Manual rates':(updatedAt?'● Live reference rates':'● Offline fallback');
+  };
+  async function fetchRates(){
+    if(manual){status('Manual rates are active.');return;}
+    $('rateBadge').textContent='● Updating…';status('Fetching latest reference rates…');
+    try{
+      const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),9000);
+      const res=await fetch('https://open.er-api.com/v6/latest/USD',{signal:controller.signal,cache:'no-store'});clearTimeout(timer);
+      if(!res.ok)throw new Error('Rate service unavailable');
+      const data=await res.json();
+      if(data.result!=='success'||!data.rates.GBP||!data.rates.EUR||!data.rates.CAD)throw new Error('Invalid rate response');
+      rates={USD:1,GBP:1/data.rates.GBP,EUR:1/data.rates.EUR,CAD:1/data.rates.CAD,USC:.01};
+      updatedAt=data.time_last_update_utc||new Date().toISOString();
+      localStorage.setItem('currencyRates',JSON.stringify({rates,updatedAt}));
+      renderRates();calculate();status('Rates updated · '+new Date(updatedAt).toLocaleString(),'ok');
+    }catch(e){
+      renderRates();calculate();status('Could not refresh. Showing last saved or fallback rates.','error');
+    }
+  }
+  function loadSaved(){
+    try{const saved=JSON.parse(localStorage.getItem('currencyRates')||'null');if(saved?.rates){rates={...fallback,...saved.rates};updatedAt=saved.updatedAt;}}catch{}
+    try{const s=JSON.parse(localStorage.getItem('currencySettings')||'null');if(s){manual=!!s.manual;if(manual)rates={...rates,...s.rates,USC:.01,USD:1};}}catch{}
+    renderRates();
+  }
+  function renderHistory(){
+    const h=JSON.parse(localStorage.getItem('currencyHistory')||'[]');
+    $('history').innerHTML='';
+    if(!h.length){$('history').innerHTML='<div style="color:var(--muted);font-size:12px">No saved calculations yet.</div>';return;}
+    h.forEach((item,index)=>{
+      const row=document.createElement('div');row.className='history-item';
+      const info=document.createElement('div');const strong=document.createElement('strong');strong.textContent='$'+fmt(item.total);
+      const small=document.createElement('small');small.textContent=item.date+' · '+item.summary;
+      info.append(strong,small);
+      const load=document.createElement('button');load.className='secondary';load.textContent='Load';load.onclick=()=>{ids.forEach(id=>$(id).value=item.amounts[id]||'');calculate();status('Saved calculation loaded.','ok');};
+      row.append(info,load);$('history').append(row);
+    });
+  }
+  function saveCalculation(){
+    const result=calculate();const amounts=result.amounts;
+    if(!ids.some(id=>$(id).value.trim()!=='')){status('Enter an amount before saving.','error');return;}
+    const summary=ids.filter(id=>amounts[id]>0).map(id=>id.toUpperCase()+': '+amounts[id]).join(' · ');
+    const h=JSON.parse(localStorage.getItem('currencyHistory')||'[]');
+    h.unshift({total:result.total,amounts,date:new Date().toLocaleString(),summary});localStorage.setItem('currencyHistory',JSON.stringify(h.slice(0,20)));renderHistory();status('Calculation saved on this device.','ok');
+  }
+  function openSettings(){
+    $('manualToggle').checked=manual;$('manualGBP').value=rates.GBP;$('manualEUR').value=rates.EUR;$('manualCAD').value=rates.CAD;$('settingsModal').classList.add('show');$('settingsModal').setAttribute('aria-hidden','false');
+  }
+  function closeSettings(){$('settingsModal').classList.remove('show');$('settingsModal').setAttribute('aria-hidden','true');}
+  $('settingsBtn').onclick=openSettings;$('cancelSettings').onclick=closeSettings;
+  $('saveSettings').onclick=()=>{
+    const r={GBP:Number($('manualGBP').value),EUR:Number($('manualEUR').value),CAD:Number($('manualCAD').value)};
+    if(Object.values(r).some(v=>!Number.isFinite(v)||v<=0)){status('Enter a valid positive rate for each currency.','error');return;}
+    manual=$('manualToggle').checked;
+    if(manual)rates={...rates,...r,USD:1,USC:.01};
+    localStorage.setItem('currencySettings',JSON.stringify({manual,rates:r}));
+    renderRates();calculate();closeSettings();status(manual?'Manual rates applied.':'Live rates selected.','ok');if(!manual)fetchRates();
+  };
+  ids.forEach(id=>$(id).addEventListener('input',calculate));
+  $('refreshBtn').onclick=fetchRates;$('clearBtn').onclick=()=>{ids.forEach(id=>$(id).value='');calculate();status('All amounts cleared.');};
+  $('copyBtn').onclick=async()=>{const {total}=calculate();try{if(window.AndroidBridge){AndroidBridge.copyText('$'+fmt(total));status('Total copied to clipboard.','ok');}else{await navigator.clipboard.writeText('$'+fmt(total));status('Total copied to clipboard.','ok');}}catch{status('Clipboard access unavailable.','error');}};
+  $('shareBtn').onclick=async()=>{const {amounts,total}=calculate();const msg='Currency total: $'+fmt(total)+' USD\n'+ids.filter(id=>amounts[id]>0).map(id=>id.toUpperCase()+': '+amounts[id]).join('\n');if(window.AndroidBridge){AndroidBridge.shareText(msg);}else if(navigator.share){try{await navigator.share({title:'Currency calculation',text:msg});}catch{}}else{try{await navigator.clipboard.writeText(msg);status('Summary copied.','ok');}catch{status('Sharing is not supported in this browser.','error');}}};
+  $('saveBtn').onclick=saveCalculation;$('clearHistoryBtn').onclick=()=>{localStorage.removeItem('currencyHistory');renderHistory();status('Saved history cleared.');};
+  $('settingsModal').addEventListener('click',e=>{if(e.target===$('settingsModal'))closeSettings();});
+  loadSaved();renderHistory();calculate();fetchRates();
+  if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+})();
+</script>
+</body>
+</html>
